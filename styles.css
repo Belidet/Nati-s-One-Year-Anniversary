@@ -13,7 +13,8 @@
     --dark-bg: #2c3e50;
     --text-light: #ecf0f1;
     --text-dark: #2c3e50;
-    --gold: #c4a747;
+    --gold: #f1c40f;
+    --candle-glow: #ff9f1a;
     --transition: all 0.3s ease;
 }
 
@@ -22,12 +23,121 @@ body {
     line-height: 1.6;
     color: var(--text-dark);
     overflow-x: hidden;
+    position: relative;
+    min-height: 100vh;
 }
 
 .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 20px;
+    position: relative;
+    z-index: 10;
+}
+
+/* Candle Background Effect */
+.candles-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    pointer-events: none;
+    z-index: 1;
+    opacity: 0.15;
+}
+
+.candle {
+    position: absolute;
+    bottom: 20px;
+    width: 20px;
+    height: 60px;
+}
+
+.candle-1 { left: 5%; }
+.candle-2 { left: 15%; }
+.candle-3 { left: 25%; }
+.candle-4 { left: 35%; }
+.candle-5 { left: 45%; }
+.candle-6 { left: 55%; }
+.candle-7 { left: 65%; }
+.candle-8 { left: 75%; }
+.candle-9 { left: 85%; }
+.candle-10 { left: 95%; }
+
+.wax {
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to top, #f1c40f, #e67e22);
+    border-radius: 5px 5px 0 0;
+    box-shadow: 0 0 20px rgba(241, 196, 15, 0.3);
+    animation: flicker 3s infinite ease-in-out;
+}
+
+.flame {
+    position: absolute;
+    top: -25px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 12px;
+    height: 25px;
+    background: linear-gradient(to top, #ff9f1a, #f1c40f, #fff5e6);
+    border-radius: 50% 50% 20% 20%;
+    animation: burn 2s infinite ease-in-out;
+    box-shadow: 0 0 30px #ff9f1a;
+}
+
+.flame::before {
+    content: '';
+    position: absolute;
+    top: -5px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 6px;
+    height: 10px;
+    background: #fff5e6;
+    border-radius: 50%;
+    filter: blur(2px);
+}
+
+@keyframes burn {
+    0%, 100% {
+        height: 25px;
+        transform: translateX(-50%) scale(1);
+    }
+    25% {
+        height: 28px;
+        transform: translateX(-50%) scale(1.1);
+    }
+    50% {
+        height: 22px;
+        transform: translateX(-50%) scale(0.9);
+    }
+    75% {
+        height: 26px;
+        transform: translateX(-50%) scale(1.05);
+    }
+}
+
+@keyframes flicker {
+    0%, 100% {
+        opacity: 1;
+        transform: scaleY(1);
+    }
+    25% {
+        opacity: 0.9;
+        transform: scaleY(1.02);
+    }
+    50% {
+        opacity: 0.8;
+        transform: scaleY(0.98);
+    }
+    75% {
+        opacity: 0.9;
+        transform: scaleY(1.01);
+    }
 }
 
 /* Header Styles */
@@ -35,13 +145,14 @@ body {
     position: relative;
     height: 100vh;
     min-height: 600px;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     display: flex;
     align-items: center;
     justify-content: center;
     text-align: center;
     color: white;
     overflow: hidden;
+    z-index: 5;
 }
 
 .hero::before {
@@ -51,9 +162,8 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" preserveAspectRatio="none"><path d="M0,0 L100,0 L100,100 L0,100 Z" fill="rgba(255,255,255,0.05)"/></svg>');
-    background-size: cover;
-    opacity: 0.1;
+    background: radial-gradient(circle at center, transparent 0%, rgba(0,0,0,0.5) 100%);
+    z-index: 1;
 }
 
 .hero-overlay {
@@ -62,13 +172,13 @@ body {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.3);
-    z-index: 1;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 2;
 }
 
 .hero-content {
     position: relative;
-    z-index: 2;
+    z-index: 3;
     animation: fadeInUp 1.5s ease;
 }
 
@@ -79,6 +189,7 @@ body {
     letter-spacing: 4px;
     margin-bottom: 1rem;
     opacity: 0.9;
+    text-shadow: 0 0 20px rgba(241, 196, 15, 0.3);
 }
 
 .memorial-name {
@@ -86,14 +197,16 @@ body {
     font-size: 5rem;
     font-weight: 700;
     margin-bottom: 1rem;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    text-shadow: 0 0 30px rgba(241, 196, 15, 0.5);
 }
 
 .memorial-dates {
-    font-size: 1.5rem;
+    font-size: 2rem;
     font-weight: 300;
-    letter-spacing: 2px;
+    letter-spacing: 4px;
     margin-bottom: 2rem;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(241, 196, 15, 0.5);
 }
 
 .memorial-ribbon {
@@ -102,6 +215,7 @@ body {
     background: var(--gold);
     margin: 2rem auto 0;
     position: relative;
+    box-shadow: 0 0 20px var(--gold);
 }
 
 .memorial-ribbon::before,
@@ -114,6 +228,7 @@ body {
     border-radius: 50%;
     top: 50%;
     transform: translateY(-50%);
+    box-shadow: 0 0 10px var(--gold);
 }
 
 .memorial-ribbon::before {
@@ -127,15 +242,28 @@ body {
 /* Gallery Section */
 .gallery {
     padding: 80px 0;
-    background: var(--light-bg);
+    background: rgba(255, 255, 255, 0.95);
+    position: relative;
+    z-index: 5;
+    backdrop-filter: blur(5px);
 }
 
 .gallery-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 50px;
-    align-items: center;
-    margin-bottom: 80px;
+    gap: 0;
+    align-items: stretch;
+    margin-bottom: 50px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
+    transition: var(--transition);
+}
+
+.gallery-row:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
 }
 
 .gallery-row:last-child {
@@ -145,14 +273,7 @@ body {
 .gallery-image {
     position: relative;
     overflow: hidden;
-    border-radius: 10px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
-    transition: var(--transition);
-}
-
-.gallery-image:hover {
-    transform: scale(1.02);
-    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
+    height: 100%;
 }
 
 .gallery-image img {
@@ -163,8 +284,16 @@ body {
     transition: var(--transition);
 }
 
-.gallery-text {
-    padding: 30px;
+.gallery-row:hover .gallery-image img {
+    transform: scale(1.05);
+}
+
+.gallery-text.joined {
+    padding: 40px;
+    display: flex;
+    align-items: center;
+    background: linear-gradient(135deg, #f8f9fa 0%, #ffffff 100%);
+    height: 100%;
 }
 
 .tribute-text {
@@ -174,16 +303,17 @@ body {
     font-style: italic;
     position: relative;
     padding: 20px;
-    background: white;
+    background: rgba(255, 255, 255, 0.9);
     border-radius: 10px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+    margin: 0;
+    border-left: 4px solid var(--gold);
 }
 
 .tribute-text::before {
     content: '"';
     font-size: 4rem;
     color: var(--gold);
-    opacity: 0.3;
+    opacity: 0.2;
     position: absolute;
     top: -10px;
     left: 0;
@@ -193,8 +323,10 @@ body {
 /* Thank You Section */
 .thanks-section {
     padding: 80px 0;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: white;
+    position: relative;
+    z-index: 5;
 }
 
 .thanks-card {
@@ -205,13 +337,16 @@ body {
     background: rgba(255, 255, 255, 0.1);
     backdrop-filter: blur(10px);
     border-radius: 20px;
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    border: 1px solid rgba(241, 196, 15, 0.3);
 }
 
 .thanks-title {
     font-family: 'Playfair Display', serif;
     font-size: 2.5rem;
     margin-bottom: 20px;
+    color: var(--gold);
+    text-shadow: 0 0 20px rgba(241, 196, 15, 0.3);
 }
 
 .thanks-message {
@@ -224,13 +359,16 @@ body {
 .thanks-signature {
     font-size: 1.1rem;
     font-style: italic;
+    color: var(--gold);
 }
 
 /* Donation Section */
 .donation-section {
     padding: 80px 0;
-    background: var(--light-bg);
+    background: rgba(255, 255, 255, 0.95);
     position: relative;
+    z-index: 5;
+    backdrop-filter: blur(5px);
 }
 
 /* Circular Photo Styles */
@@ -240,6 +378,7 @@ body {
     margin: 0 auto 30px;
     position: relative;
     animation: fadeIn 1s ease;
+    z-index: 6;
 }
 
 .memorial-circle-photo::before {
@@ -250,9 +389,10 @@ body {
     right: -5px;
     bottom: -5px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, var(--gold) 0%, #f39c12 100%);
     z-index: 1;
     animation: rotate 10s linear infinite;
+    box-shadow: 0 0 30px var(--gold);
 }
 
 .memorial-circle-photo::after {
@@ -282,7 +422,7 @@ body {
 
 .memorial-circle-photo:hover img {
     transform: scale(1.05);
-    box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
+    box-shadow: 0 15px 40px rgba(241, 196, 15, 0.4);
 }
 
 @keyframes rotate {
@@ -329,11 +469,13 @@ body {
     text-align: center;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
     transition: var(--transition);
+    border: 1px solid rgba(241, 196, 15, 0.1);
 }
 
 .ngo-card:hover {
     transform: translateY(-10px);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 20px 40px rgba(241, 196, 15, 0.2);
+    border-color: var(--gold);
 }
 
 .ngo-logo {
@@ -367,7 +509,7 @@ body {
 }
 
 .donate-btn {
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    background: linear-gradient(135deg, #1a1a2e 0%, #16213e 100%);
     color: white;
     border: none;
     padding: 12px 30px;
@@ -378,11 +520,13 @@ body {
     transition: var(--transition);
     text-transform: uppercase;
     letter-spacing: 1px;
+    border: 1px solid var(--gold);
 }
 
 .donate-btn:hover {
     transform: scale(1.05);
-    box-shadow: 0 10px 20px rgba(102, 126, 234, 0.4);
+    background: linear-gradient(135deg, #16213e 0%, #1a1a2e 100%);
+    box-shadow: 0 10px 20px rgba(241, 196, 15, 0.3);
 }
 
 /* Modal Styles */
@@ -393,8 +537,8 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.8);
-    z-index: 1000;
+    background: rgba(0, 0, 0, 0.9);
+    z-index: 2000;
     overflow-y: auto;
     animation: fadeIn 0.3s ease;
 }
@@ -408,6 +552,7 @@ body {
     padding: 40px;
     box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
     animation: slideIn 0.3s ease;
+    border: 1px solid var(--gold);
 }
 
 .modal-close {
@@ -564,6 +709,7 @@ body {
     z-index: 2000;
     transition: transform 0.3s ease;
     opacity: 0;
+    border: 1px solid var(--gold);
 }
 
 .toast.show {
@@ -605,12 +751,20 @@ body {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .candles-background {
+        opacity: 0.1;
+    }
+    
     .memorial-title {
         font-size: 2rem;
     }
     
     .memorial-name {
         font-size: 3rem;
+    }
+    
+    .memorial-dates {
+        font-size: 1.5rem;
     }
     
     .memorial-circle-photo {
@@ -620,21 +774,14 @@ body {
     
     .gallery-row {
         grid-template-columns: 1fr;
-        gap: 30px;
-        margin-bottom: 50px;
-    }
-    
-    .gallery-row.reverse {
-        display: flex;
-        flex-direction: column-reverse;
     }
     
     .gallery-image img {
         height: 300px;
     }
     
-    .gallery-text {
-        padding: 20px;
+    .gallery-text.joined {
+        padding: 30px;
     }
     
     .tribute-text {
@@ -677,7 +824,7 @@ body {
     }
     
     .memorial-dates {
-        font-size: 1rem;
+        font-size: 1.2rem;
     }
     
     .memorial-circle-photo {
@@ -687,6 +834,10 @@ body {
     
     .gallery-image img {
         height: 250px;
+    }
+    
+    .gallery-text.joined {
+        padding: 20px;
     }
     
     .ngos-grid {
@@ -700,15 +851,17 @@ body {
 
 /* Print Styles */
 @media print {
-    .hero {
-        height: auto;
-        min-height: auto;
-        color: black;
-    }
-    
+    .candles-background,
     .donate-btn,
     .modal,
     .toast {
         display: none !important;
+    }
+    
+    .hero {
+        height: auto;
+        min-height: auto;
+        color: black;
+        background: white;
     }
 }
