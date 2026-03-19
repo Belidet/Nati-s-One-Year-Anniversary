@@ -70,12 +70,24 @@ document.addEventListener('DOMContentLoaded', () => {
         observer.observe(el);
     });
 
-    // Add special animation for circular photo
-    const circlePhoto = document.querySelector('.memorial-circle-photo');
-    if (circlePhoto) {
-        circlePhoto.style.animation = 'fadeIn 1s ease';
-    }
+    // Add floating animation to candles
+    animateCandles();
 });
+
+// Animate candles with random flicker
+function animateCandles() {
+    const candles = document.querySelectorAll('.candle');
+    candles.forEach((candle, index) => {
+        // Random delay for each candle
+        const delay = index * 0.3;
+        candle.style.animation = `flicker ${3 + Math.random()}s infinite ease-in-out ${delay}s`;
+        
+        const flame = candle.querySelector('.flame');
+        if (flame) {
+            flame.style.animation = `burn ${2 + Math.random()}s infinite ease-in-out ${delay}s`;
+        }
+    });
+}
 
 // Modal functions
 function openModal(ngo) {
