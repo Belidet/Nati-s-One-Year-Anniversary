@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>In Loving Memory - Nathnael Markos | 1 Year Anniversary</title>
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@400;600;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header Section -->
+    <header class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="memorial-title">In Loving Memory</h1>
+            <h2 class="memorial-name">Nathnael Markos</h2>
+            <p class="memorial-dates">First Anniversary | 1997 - 2025</p>
+            <div class="memorial-ribbon"></div>
+        </div>
+    </header>
+
+    <!-- Photo Gallery Section -->
+    <section class="gallery">
+        <div class="container">
+            <!-- Row 1: Image Left, Text Right -->
+            <div class="gallery-row reverse">
+                <div class="gallery-image">
+                    <img src="1.jpg" alt="Nathnael Markos" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Nathnael+Markos'">
+                </div>
+                <div class="gallery-text">
+                    <p class="tribute-text">"A life beautifully lived, a heart deeply loved. Nathnael brought light to everyone he met, leaving footprints of kindness on our hearts."</p>
+                </div>
+            </div>
+
+            <!-- Row 2: Text Left, Image Right -->
+            <div class="gallery-row">
+                <div class="gallery-text">
+                    <p class="tribute-text">"His laughter echoed in our happiest moments, his wisdom guided us through challenges. Though he's gone, his spirit lives on in every life he touched."</p>
+                </div>
+                <div class="gallery-image">
+                    <img src="2.jpg" alt="Nathnael Markos" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Nathnael+Markos'">
+                </div>
+            </div>
+
+            <!-- Row 3: Image Left, Text Right -->
+            <div class="gallery-row reverse">
+                <div class="gallery-image">
+                    <img src="3.jpg" alt="Nathnael Markos" loading="lazy" onerror="this.src='https://via.placeholder.com/600x400?text=Nathnael+Markos'">
+                </div>
+                <div class="gallery-text">
+                    <p class="tribute-text">"Those we love don't go away, they walk beside us every day. Unseen, unheard, but always near, still loved, still missed, and forever dear."</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thank You Message -->
+    <section class="thanks-section">
+        <div class="container">
+            <div class="thanks-card">
+                <h3 class="thanks-title">With Gratitude</h3>
+                <p class="thanks-message">
+                    Our deepest appreciation to all who joined us in commemorating Nathnael's first anniversary. 
+                    Your presence, prayers, and support have been a source of strength and comfort. 
+                    Thank you for honoring his memory and keeping his light alive in our hearts.
+                </p>
+                <p class="thanks-signature"> Program Coordinators</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Donation Section with Circular Photo -->
+    <section class="donation-section">
+        <div class="container">
+            <!-- Circular Photo of Nathnael -->
+            <div class="memorial-circle-photo">
+                <img src="5.jpg" alt="Nathnael Markos" onerror="this.src='https://via.placeholder.com/200x200?text=Nathnael'">
+            </div>
+            
+            <h3 class="section-title">Donate in My Name</h3>
+            <p class="section-subtitle">Continue Nathnael's legacy of compassion by supporting these causes</p>
+            
+            <div class="ngos-grid">
+                <!-- Mekedonia -->
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="MEKEDONIA.jpg" alt="Mekedonia Charity Association" onerror="this.src='https://via.placeholder.com/150x150?text=Mekedonia'">
+                    </div>
+                    <h4>Mekedonia Charity Association</h4>
+                    <p>Supporting elderly and mentally challenged individuals</p>
+                    <button class="donate-btn" data-ngo="mekedonia">Donate</button>
+                </div>
+
+                <!-- Mary Joy Ethiopia -->
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="MARY JOY ETHIOPIA.jpg" alt="Mary Joy Ethiopia" onerror="this.src='https://via.placeholder.com/150x150?text=Mary+Joy+Ethiopia'">
+                    </div>
+                    <h4>Mary Joy Ethiopia</h4>
+                    <p>Supporting children and families in need</p>
+                    <button class="donate-btn" data-ngo="maryjoy">Donate</button>
+                </div>
+
+                <!-- Mathiwos -->
+                <div class="ngo-card">
+                    <div class="ngo-logo">
+                        <img src="MATHIWOS WONDU FOUNDATION.jpg" alt="Mathiwos Wondu Foundation" onerror="this.src='https://via.placeholder.com/150x150?text=Mathiwos+Foundation'">
+                    </div>
+                    <h4>Mathiwos Wondu Foundation</h4>
+                    <p>Supporting children with cancer</p>
+                    <button class="donate-btn" data-ngo="mathiwos">Donate</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Modal -->
+    <div class="modal" id="donationModal">
+        <div class="modal-content">
+            <button class="modal-close">&times;</button>
+            
+            <div class="modal-inner">
+                <div class="memorial-photo">
+                    <img src="4.jpg" alt="Nathnael Markos" onerror="this.src='https://via.placeholder.com/150x150?text=Nathnael'">
+                </div>
+                
+                <h3 class="modal-message">Thank you for donating in my name</h3>
+                
+                <div class="bank-details" id="bankDetails">
+                    <!-- Bank details will be populated by JavaScript -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="toast">Copied to clipboard!</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
