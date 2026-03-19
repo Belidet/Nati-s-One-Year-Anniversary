@@ -69,40 +69,13 @@ document.addEventListener('DOMContentLoaded', () => {
         el.style.transition = 'opacity 0.6s ease, transform 0.6s ease';
         observer.observe(el);
     });
-
-    // Animate all candles
-    animateAllCandles();
 });
-
-// Animate all candles with random flicker
-function animateAllCandles() {
-    const candles = document.querySelectorAll('.candle');
-    candles.forEach((candle, index) => {
-        // Random delay for each candle
-        const delay = index * 0.2;
-        const wax = candle.querySelector('.wax');
-        const flame = candle.querySelector('.flame');
-        
-        if (wax) {
-            wax.style.animation = `flicker ${2 + Math.random() * 2}s infinite ease-in-out ${delay}s`;
-        }
-        
-        if (flame) {
-            flame.style.animation = `burn ${1.5 + Math.random() * 1.5}s infinite ease-in-out ${delay}s`;
-        }
-    });
-}
 
 // Modal functions
 function openModal(ngo) {
     populateBankDetails(ngo);
     modal.style.display = 'block';
     document.body.style.overflow = 'hidden'; // Prevent scrolling
-    
-    // Animate modal candles
-    setTimeout(() => {
-        animateAllCandles();
-    }, 100);
 }
 
 function closeModal() {
@@ -141,11 +114,6 @@ function populateBankDetails(ngo) {
     });
     
     bankDetails.innerHTML = html;
-    
-    // Re-animate candles after content update
-    setTimeout(() => {
-        animateAllCandles();
-    }, 100);
 }
 
 // Handle bank image errors with better fallback
@@ -285,15 +253,6 @@ window.addEventListener('orientationchange', () => {
             modal.scrollTop = 0;
         }, 100);
     }
-});
-
-// Re-animate candles on scroll to maintain flicker effect
-window.addEventListener('scroll', () => {
-    // Throttle the animation to improve performance
-    if (!window.requestAnimationFrame) return;
-    window.requestAnimationFrame(() => {
-        animateAllCandles();
-    });
 });
 
 // Export functions for global use
